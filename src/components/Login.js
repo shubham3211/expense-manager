@@ -9,6 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {pink} from '@material-ui/core/colors';
 import isEmail from '../utils/isEmail'
+import {login} from '../redux/actions/login'
 
 const validate = values => {
   const errors = {};
@@ -30,7 +31,7 @@ const validate = values => {
 class Login extends React.Component {
 
   onSubmit = formValues => {
-    console.log('ccc', formValues);
+    this.props.login(formValues.email, formValues.password);
   } 
 
   renderTextField = ({input, label, type, meta:{touched, error}}) => {
@@ -74,10 +75,10 @@ class Login extends React.Component {
             <Grid item xs={12}>
               <Field name="password" component={this.renderTextField} normalize={this.trimPassword} type="password" label="Password *"  />
             </Grid>
+            <Button variant="contained" color="primary" type="submit" size="large" fullWidth>
+              LOG IN
+            </Button>
           </form>
-          <Button variant="contained" color="primary" type="submit" size="large" fullWidth>
-            LOG IN
-          </Button>
         </Grid>
       </Grid>
     )
@@ -89,4 +90,4 @@ const loginValues = reduxForm({
   validate
 })(Login)
 
-export default connect(null, {})(loginValues);
+export default connect(null, {login})(loginValues);
