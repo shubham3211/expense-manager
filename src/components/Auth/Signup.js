@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import TextField from '@material-ui/core/TextField';
@@ -8,8 +8,9 @@ import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {pink} from '@material-ui/core/colors';
-import isEmail from '../utils/isEmail'
-import {login} from '../redux/actions/login'
+import isEmail from '../../utils/isEmail';
+import {signup} from '../../redux/actions/auth/signup';
+import axios from 'axios';
 
 const validate = values => {
   const errors = {};
@@ -28,10 +29,15 @@ const validate = values => {
   return errors;
 }
 
-class Login extends React.Component {
+class Signup extends React.Component {
 
   onSubmit = formValues => {
-    this.props.login(formValues.email, formValues.password);
+    // this.props.signup(formValues.name, formValues.email, formValues.password);
+    axios.post('http://localhost:5000/auth/signup', {
+      name: formValues.name,
+      email: formValues.email,
+      password: formValues.password
+    })
   } 
 
   renderTextField = ({input, label, type, meta:{touched, error}}) => {
@@ -66,9 +72,12 @@ class Login extends React.Component {
             <LockOutlinedIcon align="center"/>
           </Avatar>
           <Typography component="h1" variant="h5" align="center">
-            Login
+            Signup
           </Typography>
           <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+            <Grid item xs={12}>
+              <Field name="name" component={this.renderTextField} type="text" label="Name *" />
+            </Grid>
             <Grid item xs={12}>
               <Field name="email" component={this.renderTextField} type="email" label="Email Address *" />
             </Grid>
@@ -76,7 +85,7 @@ class Login extends React.Component {
               <Field name="password" component={this.renderTextField} normalize={this.trimPassword} type="password" label="Password *"  />
             </Grid>
             <Button variant="contained" color="primary" type="submit" size="large" fullWidth>
-              LOG IN
+              Signup
             </Button>
           </form>
         </Grid>
@@ -85,9 +94,9 @@ class Login extends React.Component {
   }
 }
 
-const loginValues = reduxForm({
-  form: 'login',
+const signupValues = reduxForm({
+  form: 'signup',
   validate
-})(Login)
+})(Signup)
 
-export default connect(null, {login})(loginValues);
+export default connect(null, {signup})(signupValues);

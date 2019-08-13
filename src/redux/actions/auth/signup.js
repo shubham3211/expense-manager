@@ -1,19 +1,19 @@
-import {LOGIN} from '../../constants/';
+import {SIGNUP} from '../../../constants';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
-export const login = (email, password) => {
+export const signup = (name, email, password) => {
   return dispatch => {
     axios.post('http://localhost:5000/auth/signup', {
-      name: 'shubham',
-      email,
+      name,
+      username: email,
       password
     }).then((user) => {
       setCookies(user.data);
       dispatch({
-        type: LOGIN,
+        type: SIGNUP,
         payload: user.data
       })
     })
