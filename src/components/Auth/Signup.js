@@ -37,6 +37,10 @@ class Signup extends React.Component {
       name: formValues.name,
       email: formValues.email,
       password: formValues.password
+    }).then((user) => {
+      console.log(user);
+    }).catch((err) =>{
+      console.log(err);
     })
   } 
 
