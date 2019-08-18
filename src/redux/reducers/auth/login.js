@@ -9,8 +9,6 @@ const initState = {
   userId: cookies.get('userId')
 }
 
-console.log('cookies', cookies);
-
 const login = (state = initState, action) => {
   switch(action.type){
     case LOGIN: 

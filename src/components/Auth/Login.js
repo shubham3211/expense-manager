@@ -10,6 +10,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {pink} from '@material-ui/core/colors';
 import isEmail from '../../utils/isEmail'
 import {login} from '../../redux/actions/auth/login'
+import {Redirect} from 'react-router-dom';
 
 const validate = values => {
   const errors = {};
@@ -59,6 +60,9 @@ class Login extends React.Component {
   }
 
   render(){
+    // if(this.props.user){
+    //   return <Redirect to="/home" />
+    // }
     return (
       <Grid container direction="row" justify="center">
         <Grid item xs={4} >
@@ -90,4 +94,10 @@ const loginValues = reduxForm({
   validate
 })(Login)
 
-export default connect(null, {login})(loginValues);
+const mapStateToProps = (state) => {
+  return {
+    user : state.user
+  }
+}
+
+export default connect(mapStateToProps, {login})(loginValues);
