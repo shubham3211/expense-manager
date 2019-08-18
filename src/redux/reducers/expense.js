@@ -1,4 +1,4 @@
-import {EXPENSE_MONTH, EXPENSE_YEAR, EXPENSE_DAY} from '../../constants';
+import {EXPENSE_MONTH, EXPENSE_YEAR, EXPENSE_WEEK} from '../../constants';
 
 export const expense = (state={}, action) => {
   switch(action.type){
@@ -6,8 +6,8 @@ export const expense = (state={}, action) => {
       return {...state, 'month':action.payload}
     case EXPENSE_YEAR:
       return {...state, 'year':action.payload}
-    case EXPENSE_DAY:
-      return {...state, 'day':action.payload}
+    case EXPENSE_WEEK:
+      return {...state, 'week':action.payload}
     default:
       return state;
   }

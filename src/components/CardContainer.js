@@ -6,7 +6,7 @@ class CardContainer extends React.Component {
     return (
       <React.Fragment>
         <GraphCard duration="month" />
-        <GraphCard duration="day" />
+        <GraphCard duration="week" />
         <GraphCard duration="year" />
       </React.Fragment>
     )
