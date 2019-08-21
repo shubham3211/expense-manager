@@ -5,6 +5,54 @@ import {distributeExpense} from '../utils/expenseDuration'
 import {Line} from 'react-chartjs-2';
 import moment from 'moment';
 import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import styled from 'styled-components'
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid'
+
+const StyledGrid = styled(Grid)`
+  position: relative;
+  top:-20px;
+  margin-left:20px;
+  margin-right:20px;
+  background-image:linear-gradient(60deg, rgb(102, 187, 106), rgb(67, 160, 71));
+  border-radius:3px; 
+  padding:15px
+`;
+
+const chartOptions = {
+  scales: {
+    xAxes: [
+      {
+        gridLines: { 
+          color: "rgb(255, 255, 255, 0.2)", 
+          borderDash: [8, 4] 
+        },
+        ticks:{
+          fontColor:"rgb(255, 255, 255, 0.7)"
+        }
+      }
+    ],
+    yAxes: [
+      {
+        gridLines: { 
+          color: "rgb(255, 255, 255, 0.2)", 
+          borderDash: [8, 4] 
+        }, 
+        ticks:{
+         fontColor:"rgb(255, 255, 255, 0.7)"
+        }
+      }
+    ]
+  },
+  axisX: {
+    labelFontColor: "white"
+  },
+  legend: {
+    display: false
+  }
+}
 
 class GraphCard extends React.Component {
 
@@ -27,22 +75,22 @@ class GraphCard extends React.Component {
           label: '',
           fill: false,
           lineTension: 0.1,
-          backgroundColor: 'rgba(75,192,192,0.4)',
-          borderColor: 'rgba(75,192,192,1)',
+          backgroundColor: 'rgb(255, 255, 255, 0.8)',
+          borderColor: 'rgb(255, 255, 255, 0.8)',
           borderCapStyle: 'butt',
           borderDash: [],
           borderDashOffset: 0.0,
           borderJoinStyle: 'miter',
-          pointBorderColor: 'rgba(75,192,192,1)',
-          pointBackgroundColor: '#fff',
+          pointBorderColor: 'rgb(255, 255, 255, 0.8)',
+          pointBackgroundColor: 'rgb(255, 255, 255, 0.8)',
           pointBorderWidth: 1,
           pointHoverRadius: 5,
-          pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-          pointHoverBorderColor: 'rgba(220,220,220,1)',
+          pointHoverBackgroundColor: 'rgb(255, 255, 255, 0.8)',
+          pointHoverBorderColor: 'rgb(255, 255, 255, 0.8)',
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: this.distributedExpense
+          data: this.distributedExpense,
         }
       ]
     };
@@ -50,10 +98,23 @@ class GraphCard extends React.Component {
 
   render() {
     this.distributedExpense = this.props.moneySpent ? distributeExpense(this.props.moneySpent, this.props.duration) : [];
+
     return (
       <React.Fragment>
-        {this.props.duration}
-        <Line data={this.makeDataForGraph()} />
+        <Card style={{overflow:"visible"}}>
+          <StyledGrid style={{}}>
+            <Line data={this.makeDataForGraph()} options={chartOptions}/>
+          </StyledGrid>
+          <CardActionArea>
+            <CardContent>
+              <Typography component="p">
+                This impressive paella is a perfect party dish and a fun meal to
+                cook together with your guests. Add 1 cup of frozen peas along
+                with the mussels, if you like.
+              </Typography>
+          </CardContent>
+          </CardActionArea>
+        </Card>
       </React.Fragment>
     )
   }
