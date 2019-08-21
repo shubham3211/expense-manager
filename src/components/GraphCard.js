@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {distributeExpense} from '../utils/expenseDuration'
 import {Line} from 'react-chartjs-2';
 import moment from 'moment';
+import Card from '@material-ui/core/Card';
 
 class GraphCard extends React.Component {
 
@@ -23,7 +24,7 @@ class GraphCard extends React.Component {
       labels,
       datasets: [
         {
-          label: 'My First dataset',
+          label: '',
           fill: false,
           lineTension: 0.1,
           backgroundColor: 'rgba(75,192,192,0.4)',
@@ -47,7 +48,7 @@ class GraphCard extends React.Component {
     };
   }
 
-  render() {  
+  render() {
     this.distributedExpense = this.props.moneySpent ? distributeExpense(this.props.moneySpent, this.props.duration) : [];
     return (
       <React.Fragment>
