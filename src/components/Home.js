@@ -2,6 +2,7 @@ import React from 'react';
 import CardContainer from './CardContainer';
 import { Container } from '@material-ui/core';
 import HomeTable from './HomeTable';
+import AddExpenseDialog from './AddExpenseDialog';
 
 class Home extends React.Component {
   render() {
@@ -10,6 +11,7 @@ class Home extends React.Component {
         <Container>
           <CardContainer />
           <HomeTable />
+          <AddExpenseDialog />
         </Container>
       </React.Fragment>
     )
