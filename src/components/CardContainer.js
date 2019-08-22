@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 class CardContainer extends React.Component {
   render() {
     return (
-      <React.Fragment>  
+      <React.Fragment>
         <Grid container spacing={4} style={{marginTop:"100px"}}>
           <Grid item xs={4}>
             <GraphCard duration="month" />

@@ -6,7 +6,7 @@ import {Line} from 'react-chartjs-2';
 import moment from 'moment';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid'
@@ -17,7 +17,7 @@ const StyledGrid = styled(Grid)`
   margin-left:20px;
   margin-right:20px;
   background-image:linear-gradient(60deg, rgb(102, 187, 106), rgb(67, 160, 71));
-  border-radius:3px; 
+  border-radius:5px; 
   padding:15px
 `;
 
@@ -51,7 +51,8 @@ const chartOptions = {
   },
   legend: {
     display: false
-  }
+  },
+  animations: 'easeInBack'
 }
 
 class GraphCard extends React.Component {
@@ -63,6 +64,11 @@ class GraphCard extends React.Component {
 
   componentDidMount() {
     this.props.expense(this.props.duration);
+  }
+
+  totalMoneySpent = () => {
+    if(this.distributedExpense.length)
+    return this.distributedExpense.reduce((a,b) => a+b)
   }
 
   makeDataForGraph = () => {
@@ -107,10 +113,8 @@ class GraphCard extends React.Component {
           </StyledGrid>
           <CardActionArea>
             <CardContent>
-              <Typography component="p">
-                This impressive paella is a perfect party dish and a fun meal to
-                cook together with your guests. Add 1 cup of frozen peas along
-                with the mussels, if you like.
+              <Typography variant="h5" component="h4" color="textSecondary">
+                This {this.props.duration}: ${this.totalMoneySpent()} 
               </Typography>
           </CardContent>
           </CardActionArea>
