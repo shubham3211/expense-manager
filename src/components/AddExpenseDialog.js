@@ -4,11 +4,12 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {Field, reduxForm} from 'redux-form';
 import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography'
+import axios from 'axios';
+import {expense} from '../redux/actions/expense'
 
 const validate = values => {
   const errors = {};
@@ -34,7 +35,18 @@ class AddExpenseDialog extends React.Component {
   }
 
   onSubmit = formValues => {
-    // this.props.login(formValues.email, formValues.password);
+    console.log(formValues);
+    axios.post('http://localhost:5000/expense', {
+      date: formValues.date,
+      cost: formValues.expense,
+      category: formValues.category,
+      comment: formValues.comment,
+      user: this.props.userId
+    }).then((data) => {
+      this.props.expense('year');
+      this.props.expense('week');
+      this.props.expense('month');
+    })
   }
 
   handleOpenClose = () => {
@@ -51,7 +63,7 @@ class AddExpenseDialog extends React.Component {
           {...input}
           margin="normal"
           type={type}
-          fullWidth={type!='date'}
+          fullWidth={type!=='date'}
           error={touched && error}
         />
         {touched && error ? this.renderError(error) : null}
@@ -77,16 +89,13 @@ class AddExpenseDialog extends React.Component {
               <Field name="expense" component={this.renderTextField} type="number" label="Expense *" />
               <Field name="category" component={this.renderTextField} type="text" label="Category *" />
               <Field name="comment" component={this.renderTextField} type="text" label="Comment *" />
+              <DialogActions>
+                <Button onClick={this.handleOpenClose} type="submit" color="primary">
+                  Submit
+                </Button>
+              </DialogActions>
             </form>
           </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleOpenClose} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={this.handleOpenClose} color="primary">
-              Subscribe
-            </Button>
-          </DialogActions>
         </Dialog>
       </div>
     );
@@ -98,4 +107,10 @@ const editForm = reduxForm({
   validate
 })(AddExpenseDialog)
 
-export default connect(null, {})(editForm);
+const mapStateToProps = (state) => {
+  return {
+    userId: state.user.userId
+  }
+}
+
+export default connect(mapStateToProps, {expense})(editForm);

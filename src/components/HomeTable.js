@@ -12,13 +12,13 @@ import moment from 'moment'
 import styled from 'styled-components';
 
 const StyledTableRow = styled(TableRow)`
-  background-color: ${props => props.rowNumber ? "#fafafa" : "white"}
+  background-color: ${props => props.rownumber ? "#fafafa" : "white"}
 `
 
 class HomeTable extends React.Component {
 
-  renderRows = () => this.props.moneySpent.year.map((row, rowNumber)=> (
-    <StyledTableRow rowNumber={(rowNumber+1)%2}>
+  renderRows = () => this.props.moneySpent.map((row, rowNumber)=> (
+    <StyledTableRow rownumber={(rowNumber+1)%2} key={rowNumber+1}>
       <TableCell>{rowNumber+1}</TableCell>
       <TableCell>{moment(row.date).format("MM/DD/YYYY") } {moment(row.date).format('dddd')}</TableCell>
       <TableCell>{row.cost}</TableCell>
@@ -40,7 +40,7 @@ class HomeTable extends React.Component {
 
   render() {
     console.log('home table', this.props.moneySpent);
-    if(!this.props.moneySpent.year){
+    if(!this.props.moneySpent){
       return (<div>Hello</div>)
     }
     return (
@@ -68,7 +68,7 @@ class HomeTable extends React.Component {
 
 const manageStateToProps = (state) => {
   return {
-    moneySpent: state.expense
+    moneySpent: state.expense.year
   }
 }
 
