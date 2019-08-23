@@ -29,8 +29,8 @@ const validate = values => {
 class EditExpenseDialog extends React.Component {
 
   onSubmit = formValues => {
-    console.log('expenseId' ,this.props.expenseId);
-    axios.put(`http://localhost:5000/expense/${this.props.expenseId}`, {
+    console.log('editExpenseId' ,this.props.editExpenseId);
+    axios.put(`http://localhost:5000/expense/${this.props.editExpenseId}`, {
       date: formValues.date,
       cost: formValues.expense,
       category: formValues.category,
@@ -66,7 +66,7 @@ class EditExpenseDialog extends React.Component {
   render() {
     return (
       <div>
-        <Dialog open={this.props.showModal} onClose={this.props.editModalOpenClose} aria-labelledby="form-dialog-title">
+        <Dialog open={this.props.showEditModal} onClose={this.props.editModalOpenClose} aria-labelledby="form-dialog-title">
           <DialogTitle id="form-dialog-title">
             Edit expense
           </DialogTitle>

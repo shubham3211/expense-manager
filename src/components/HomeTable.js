@@ -11,6 +11,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import moment from 'moment'
 import styled from 'styled-components';
 import EditExpenseDialog from './EditExpenseDialog';
+import DeleteExpenseDialog from './DeleteExpenseDialog';
 
 const StyledTableRow = styled(TableRow)`
   background-color: ${props => props.rownumber ? "#fafafa" : "white"}
@@ -22,8 +23,10 @@ class HomeTable extends React.Component {
     super(props);
     this.state = {
       showEditModal: false,
+      showDeleteModal: false
     }
-    this.expenseId = 0;
+    this.editExpenseId = 0;
+    this.deleteExpenseId = 0;
   }
 
   renderRows = () => this.props.moneySpent.map((row, rowNumber)=> (
@@ -35,12 +38,12 @@ class HomeTable extends React.Component {
       <TableCell>{row.comment}</TableCell>
       <TableCell>
         <Fab color="primary" aria-label="edit" size="small">
-          <EditIcon onClick={() => this.setIdAndOpenCloseModal(row._id)} />
+          <EditIcon onClick={() => this.setIdAndOpenCloseEditModal(row._id)} />
         </Fab>
       </TableCell>
       <TableCell>
         <Fab color="secondary" aria-label="delete" size="small">
-          <DeleteIcon />
+          <DeleteIcon onClick={() => this.setIdAndOpenCloseDeleteModal(row._id)} />
         </Fab>
       </TableCell>
     </StyledTableRow>
@@ -54,8 +57,8 @@ class HomeTable extends React.Component {
     })
   }
 
-  setIdAndOpenCloseModal = (expenseId) => {
-    this.expenseId = expenseId;
+  setIdAndOpenCloseEditModal = (editExpenseId) => {
+    this.editExpenseId = editExpenseId;
     this.setState((state) => {
       return {
         showEditModal: !state.showEditModal
@@ -63,15 +66,33 @@ class HomeTable extends React.Component {
     })
   }
 
+  setIdAndOpenCloseDeleteModal = (deleteExpenseId) => {
+    this.deleteExpenseId = deleteExpenseId;
+    this.setState((state) => {
+      return {
+        showDeleteModal: !state.showDeleteModal
+      }
+    })
+  }
+
+  openCloseDeleteMoadal = () => {
+    this.setState((state) => {
+      return {
+        showDeleteModal: !state.showDeleteModal
+      }
+    })
+  }
+
   render() {
     console.log('home table', this.props.moneySpent);
-    console.log('render expenseId' ,this.expenseId);
+    console.log('render editExpenseId' ,this.editExpenseId);
     if(!this.props.moneySpent){
       return (<div>Hello</div>)
     }
     return (
       <React.Fragment>
-        <EditExpenseDialog expenseId={this.expenseId} showModal={this.state.showEditModal} editModalOpenClose={this.editModalOpenClose} />
+        <EditExpenseDialog editExpenseId={this.editExpenseId} showEditModal={this.state.showEditModal} editModalOpenClose={this.editModalOpenClose} />
+        <DeleteExpenseDialog deleteExpenseId={this.deleteExpenseId} showDeleteModal={this.state.showDeleteModal} openCloseDeleteMoadal={this.openCloseDeleteMoadal} />
         <Table>
           <TableHead>
             <TableRow style={{backgroundColor:"black"}}>
