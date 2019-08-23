@@ -10,6 +10,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import moment from 'moment'
 import styled from 'styled-components';
+import EditExpenseDialog from './EditExpenseDialog';
 
 const StyledTableRow = styled(TableRow)`
   background-color: ${props => props.rownumber ? "#fafafa" : "white"}
@@ -17,8 +18,16 @@ const StyledTableRow = styled(TableRow)`
 
 class HomeTable extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      showEditModal: false,
+    }
+    this.expenseId = 0;
+  }
+
   renderRows = () => this.props.moneySpent.map((row, rowNumber)=> (
-    <StyledTableRow rownumber={(rowNumber+1)%2} key={rowNumber+1}>
+    <StyledTableRow rownumber={(rowNumber+1)%2} key={row._id}>
       <TableCell>{rowNumber+1}</TableCell>
       <TableCell>{moment(row.date).format("MM/DD/YYYY") } {moment(row.date).format('dddd')}</TableCell>
       <TableCell>{row.cost}</TableCell>
@@ -26,7 +35,7 @@ class HomeTable extends React.Component {
       <TableCell>{row.comment}</TableCell>
       <TableCell>
         <Fab color="primary" aria-label="edit" size="small">
-          <EditIcon />
+          <EditIcon onClick={() => this.setIdAndOpenCloseModal(row._id)} />
         </Fab>
       </TableCell>
       <TableCell>
@@ -37,14 +46,32 @@ class HomeTable extends React.Component {
     </StyledTableRow>
   ))
   
+  editModalOpenClose = () => {
+    this.setState((state) => {
+      return {
+        showEditModal: !state.showEditModal
+      }
+    })
+  }
+
+  setIdAndOpenCloseModal = (expenseId) => {
+    this.expenseId = expenseId;
+    this.setState((state) => {
+      return {
+        showEditModal: !state.showEditModal
+      }
+    })
+  }
 
   render() {
     console.log('home table', this.props.moneySpent);
+    console.log('render expenseId' ,this.expenseId);
     if(!this.props.moneySpent){
       return (<div>Hello</div>)
     }
     return (
       <React.Fragment>
+        <EditExpenseDialog expenseId={this.expenseId} showModal={this.state.showEditModal} editModalOpenClose={this.editModalOpenClose} />
         <Table>
           <TableHead>
             <TableRow style={{backgroundColor:"black"}}>
@@ -66,9 +93,9 @@ class HomeTable extends React.Component {
   }
 }
 
-const manageStateToProps = (state) => {
+const manageStateToProps = (state, props) => {
   return {
-    moneySpent: state.expense.year
+    moneySpent: state.expense[props.duration]
   }
 }
 

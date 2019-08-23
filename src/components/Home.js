@@ -10,7 +10,7 @@ class Home extends React.Component {
       <React.Fragment>
         <Container>
           <CardContainer />
-          <HomeTable />
+          <HomeTable duration="year" />
           <AddExpenseDialog />
         </Container>
       </React.Fragment>

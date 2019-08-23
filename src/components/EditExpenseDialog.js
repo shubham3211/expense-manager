@@ -26,32 +26,22 @@ const validate = values => {
   return errors;
 }
 
-class AddExpenseDialog extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false
-    }
-  }
+class EditExpenseDialog extends React.Component {
 
   onSubmit = formValues => {
-    console.log(formValues);
-    axios.post('http://localhost:5000/expense', {
+    console.log('expenseId' ,this.props.expenseId);
+    axios.put(`http://localhost:5000/expense/${this.props.expenseId}`, {
       date: formValues.date,
       cost: formValues.expense,
       category: formValues.category,
       comment: formValues.comment,
-      user: this.props.userId
     }).then((data) => {
+      console.log(data)
       this.props.expense('year');
       this.props.expense('week');
       this.props.expense('month');
-    })
-  }
-
-  handleOpenClose = () => {
-    this.setState((state) => {
-      return {open: !state.open}
+    }).catch((data) => {
+      console.log(data);
     })
   }
   
@@ -76,12 +66,9 @@ class AddExpenseDialog extends React.Component {
   render() {
     return (
       <div>
-        <Button variant="outlined" color="primary" onClick={this.handleOpenClose}>
-          Open form dialog
-        </Button>
-        <Dialog open={this.state.open} onClose={this.handleOpenClose} aria-labelledby="form-dialog-title">
+        <Dialog open={this.props.showModal} onClose={this.props.editModalOpenClose} aria-labelledby="form-dialog-title">
           <DialogTitle id="form-dialog-title">
-            Add an expense
+            Edit expense
           </DialogTitle>
           <DialogContent>
             <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
@@ -90,7 +77,7 @@ class AddExpenseDialog extends React.Component {
               <Field name="category" component={this.renderTextField} type="text" label="Category *" />
               <Field name="comment" component={this.renderTextField} type="text" label="Comment *" />
               <DialogActions>
-                <Button onClick={this.handleOpenClose} type="submit" color="primary">
+                <Button onClick={this.props.editModalOpenClose} type="submit" color="primary">
                   Submit
                 </Button>
               </DialogActions>
@@ -103,14 +90,8 @@ class AddExpenseDialog extends React.Component {
 }
 
 const editForm = reduxForm({
-  form: 'addExpense',
-  validate
-})(AddExpenseDialog)
+  form: 'editExpense',
+  // validate
+})(EditExpenseDialog)
 
-const mapStateToProps = (state) => {
-  return {
-    userId: state.user.userId
-  }
-}
-
-export default connect(mapStateToProps, {expense})(editForm);
+export default connect(null, {expense})(editForm);
