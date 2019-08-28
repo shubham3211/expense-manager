@@ -16,7 +16,14 @@ class Month extends React.Component {
   }
 
   renderInfoCard = () => this.props.category.map((category) =>
-    <InfoCard expense={ category.count } icon={ categories[category._id].icon } category={ category._id } color={ categories[category._id].color } />
+    <InfoCard 
+      expense={ category.count } 
+      icon={ categories[category._id].icon }
+      category={ category._id } 
+      color={ categories[category._id].color }
+      white
+      key={category._id}
+    />
   )
   
   componentDidMount() {
