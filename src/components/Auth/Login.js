@@ -11,8 +11,6 @@ import {pink} from '@material-ui/core/colors';
 import isEmail from '../../utils/isEmail'
 import {login} from '../../redux/actions/auth/login'
 import {Redirect} from 'react-router-dom';
-import InfoCard from '../InfoCard'
-import MotorcycleOutlinedIcon from '@material-ui/icons/MotorcycleOutlined';
 
 const validate = values => {
   const errors = {};

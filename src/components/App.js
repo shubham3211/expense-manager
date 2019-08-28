@@ -16,6 +16,7 @@ class App extends React.Component {
           <Route exact path={routes.HOME} component={Home} />
           <Route exact path={routes.MONTH} render={(props) => <Month {...props} duration="month" />} />
           <Route exact path={routes.WEEK} render={(props) => <Month {...props} duration="week" />} />
+          <Route exact path={routes.WEEK} render={(props) => <Month {...props} duration="year" />} />
         </Switch>
       </Router>
     )

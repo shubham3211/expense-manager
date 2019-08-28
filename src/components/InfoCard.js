@@ -42,7 +42,7 @@ export default (props) => {
         <Grid container>
           <Grid item style={{backgroundColor:"rgba(0,0,0,0.2)"}}>
             <ButtonBase className={classes.image}>
-              <props.icon color="#fff" fontSize="large" />
+              <props.icon fontSize="large" style={{color: "#fff"}} />
             </ButtonBase>
           </Grid>
           <Grid item xs={12} sm container>
