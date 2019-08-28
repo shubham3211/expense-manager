@@ -20,12 +20,12 @@ class Month extends React.Component {
   )
   
   componentDidMount() {
-    this.props.expense('month');
-    this.props.expenseCategory('month');
+    this.props.expense(this.props.duration);
+    this.props.expenseCategory(this.props.duration);
   }
 
   render() {
-    this.distributedExpense = this.props.moneySpent ? distributeExpense(this.props.moneySpent, 'month') : [];
+    this.distributedExpense = this.props.moneySpent ? distributeExpense(this.props.moneySpent, this.props.duration) : [];
 
     if(!this.props.moneySpent || !this.props.category){
       return (<div>Loading...</div>)
@@ -35,7 +35,7 @@ class Month extends React.Component {
       <React.Fragment>
         <div style={{backgroundColor:"black"}}>
           <LineGraph distributedExpense={this.distributedExpense} />
-          <HomeTable duration="month" />
+          <HomeTable duration={this.props.duration} />
           <DoughnutGraph category={this.props.category} />
           {this.renderInfoCard()}
         </div>
@@ -44,10 +44,10 @@ class Month extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   return {
-    moneySpent: state.expense.month,
-    category: state.expenseCategory.month
+    moneySpent: state.expense[props.duration],
+    category: state.expenseCategory[props.duration]
   }
 }
 
