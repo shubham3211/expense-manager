@@ -11,16 +11,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid'
 
-const StyledGrid = styled(Grid)`
-  position: relative;
-  top:-20px;
-  margin-left:20px;
-  margin-right:20px;
-  background-image:linear-gradient(60deg, rgb(102, 187, 106), rgb(67, 160, 71));
-  border-radius:5px; 
-  padding:15px
-`;
-
 const chartOptions = {
   scales: {
     xAxes: [
@@ -61,6 +51,16 @@ class GraphCard extends React.Component {
     super(props);
     this.distributedExpense = [];
   }
+
+  StyledGrid = styled(Grid)`
+    position: relative;
+    top:-20px;
+    margin-left:20px;
+    margin-right:20px;
+    background-image:linear-gradient(60deg, ${this.props.color}, ${this.props.color});
+    border-radius:5px; 
+    padding:15px
+`;
 
   componentDidMount() {
     this.props.expense(this.props.duration);
@@ -108,13 +108,13 @@ class GraphCard extends React.Component {
     return (
       <React.Fragment>
         <Card style={{overflow:"visible"}}>
-          <StyledGrid style={{}}>
+          <this.StyledGrid>
             <Line data={this.makeDataForGraph()} options={chartOptions}/>
-          </StyledGrid>
+          </this.StyledGrid>
           <CardActionArea>
             <CardContent>
               <Typography variant="h5" component="h4" color="textSecondary">
-                This {this.props.duration}: ${this.totalMoneySpent()} 
+                This {this.props.duration}: $ {this.totalMoneySpent()} 
               </Typography>
           </CardContent>
           </CardActionArea>

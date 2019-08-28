@@ -8,6 +8,7 @@ import { expenseCategory } from '../redux/actions/expenseCategory';
 import InfoCard from './InfoCard'
 import { categories } from '../utils/category'
 import LineGraph from './LineGraph';
+import Grid from '@material-ui/core/Grid';
 
 class Month extends React.Component {
   constructor(props){
@@ -40,12 +41,13 @@ class Month extends React.Component {
 
     return (
       <React.Fragment>
-        <div style={{backgroundColor:"black"}}>
-          <LineGraph distributedExpense={this.distributedExpense} />
-          <HomeTable duration={this.props.duration} />
-          <DoughnutGraph category={this.props.category} />
-          {this.renderInfoCard()}
-        </div>
+        <LineGraph distributedExpense={this.distributedExpense} />
+        <HomeTable duration={this.props.duration} />
+        <DoughnutGraph category={this.props.category} />
+        {this.renderInfoCard()}
+        <Grid container>
+
+        </Grid>
       </React.Fragment>
     )
   }

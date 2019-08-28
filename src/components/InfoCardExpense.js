@@ -1,7 +1,6 @@
 import React from 'react';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import { Grid } from '@material-ui/core';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
@@ -25,15 +24,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ColorLinearProgress = withStyles({
-  colorPrimary: {
-    backgroundColor: 'rgba(0,0,0,0.2)',
-  },
-  barColorPrimary: {
-    backgroundColor: '#fff',
-  },
-})(LinearProgress);
-
 export default (props) => {
   const classes = useStyles();
   return (
@@ -49,12 +39,11 @@ export default (props) => {
             <Grid item xs container direction="column">
               <Grid item xs>
                 <Typography variant="h6" style={{margin: "10px", fontSize: "18px"}}>
-                  {props.category.toUpperCase()}
+                  {props.title.toUpperCase()}
                 </Typography>
                 <Typography variant="subtitle1" style={{margin: "10px", fontWeight: "bold", fontSize: "18px"}}>
-                  {props.expense}
+                  {props.value}
                 </Typography>
-                <ColorLinearProgress variant="determinate" value={props.expense} />
               </Grid>
             </Grid>
           </Grid>
