@@ -10,6 +10,10 @@ import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography'
 import axios from 'axios';
 import {expense} from '../redux/actions/expense'
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
 
 const validate = values => {
   const errors = {};
@@ -71,6 +75,34 @@ class AddExpenseDialog extends React.Component {
     )
   }
   
+  renderSelectField = ({input, label, meta: {touched, error}}) => {
+    return (
+      <React.Fragment>
+        <FormControl error={touched && error} style={{minWidth: 120}}>
+          <InputLabel htmlFor="category-names">{label}</InputLabel>
+          <Select
+            {...input}
+            inputProps={{
+              id: 'category-names',
+            }}
+          >
+            <MenuItem value="food">Food</MenuItem>
+            <MenuItem value="entertainment">Entertainment</MenuItem>
+            <MenuItem value="clothing">Clothing</MenuItem>
+            <MenuItem value="healthcare">Healthcare</MenuItem>
+            <MenuItem value="shopping">Shopping</MenuItem>
+            <MenuItem value="automobile">Automobile</MenuItem>
+            <MenuItem value="persoalcare">Personalcare</MenuItem>
+            <MenuItem value="investments">Investment</MenuItem>
+            <MenuItem value="gifts">Gifts</MenuItem>
+            <MenuItem value="bills">Bills</MenuItem>
+            <MenuItem value="others">Others</MenuItem>
+        </Select>
+       </FormControl>
+      </React.Fragment>
+    )
+  }
+
   renderError = (error) => <Typography variant="caption" color="error">{error}</Typography>;
 
   render() {
@@ -87,8 +119,8 @@ class AddExpenseDialog extends React.Component {
             <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
               <Field name="date" component={this.renderTextField}  type="date" />
               <Field name="expense" component={this.renderTextField} type="number" label="Expense *" />
-              <Field name="category" component={this.renderTextField} type="text" label="Category *" />
               <Field name="comment" component={this.renderTextField} type="text" label="Comment *" />
+              <Field name="category" component={this.renderSelectField} label="Category" />
               <DialogActions>
                 <Button onClick={this.handleOpenClose} type="submit" color="primary">
                   Submit

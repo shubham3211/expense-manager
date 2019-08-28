@@ -84,8 +84,6 @@ class HomeTable extends React.Component {
   }
 
   render() {
-    console.log('home table', this.props.moneySpent);
-    console.log('render editExpenseId' ,this.editExpenseId);
     if(!this.props.moneySpent){
       return (<div>Hello</div>)
     }
