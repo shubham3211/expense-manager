@@ -19,6 +19,6 @@ export default (props) => {
   }
 
   return (
-    <Doughnut data={makeDataForDoughnutGraph()} />
+    <Doughnut data={makeDataForDoughnutGraph()} options={{ maintainAspectRatio: false }} />
   )
 }

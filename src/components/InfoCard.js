@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   paper: {
-    maxWidth: 500,
+    maxWidth: 410,
   },
   image: {
     width: 128,

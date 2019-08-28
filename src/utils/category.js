@@ -11,43 +11,43 @@ import DevicesOtherOutlinedIcon from '@material-ui/icons/DevicesOtherOutlined';
 
 export const categories = {
   "entertainment": {
-    color: "#0F0C15",
+    color: "#3f51b5",
     icon: MovieCreationOutlinedIcon
   },
   "clothing": {
-    color: '#AD6545',
+    color: '#84ffff',
     icon: ShopOutlinedIcon
   },
   "healthcare": {
-    color: "#673BAA",
+    color: "#b388ff",
     icon: LocalHospitalOutlinedIcon
   },
   "shopping": {
-    color: "#69381D",
+    color: "#e91e63",
     icon: ShoppingCartOutlinedIcon
   },
   "automobile": {
-    color: "#00FF00",
+    color: "#607d8b",
     icon: MotorcycleOutlinedIcon
   },
   "persoalcare": {
-    color: "#0000FF",
+    color: "#1976d2",
     icon: HotelOutlinedIcon
   },
   "investments": {
-    color: "#C71585",
+    color: "#a1887f",
     icon: MonetizationOnOutlinedIcon
   },
   "gifts": {
-    color: "#B8860B",
+    color: "#dd4b39",
     icon: CardGiftcardOutlinedIcon
   },
   "bills": {
-    color: "#FFA500",
+    color: "#9c27b0",
     icon: ReceiptOutlinedIcon
   },
   "others": {
-    color: "#808080",
+    color: "#9e9e9e",
     icon: DevicesOtherOutlinedIcon
   },
 }

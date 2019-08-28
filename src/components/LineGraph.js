@@ -1,5 +1,6 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
+import moment from 'moment';
 
 const chartOptions = {
   scales: {
@@ -29,17 +30,15 @@ const chartOptions = {
   axisX: {
     labelFontColor: "white"
   },
-  legend: {
-    display: false
-  },
-  animations: 'easeInBack'
+  animations: 'easeInBack',
+  maintainAspectRatio: false
 }
 
 export default (props) => {
 
   const makeDataForLineGraph = () => {
     let labels = [...Array(31).keys()];
-    
+    props.duration === 'year' ? labels = moment.monthsShort() : props.duration === 'week' ? labels = moment.weekdaysShort() : labels = [...Array(31).keys()];
     return {
       labels,
       datasets: [
@@ -69,6 +68,6 @@ export default (props) => {
   }
 
   return (
-    <Line data={makeDataForLineGraph()} />
+    <Line data={makeDataForLineGraph()} options={chartOptions} />
   )
 }

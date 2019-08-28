@@ -17,7 +17,7 @@ class CardContainer extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Grid container spacing={4} style={{marginTop:"100px", marginBottom:"20px"}}>
+        <Grid container spacing={4} style={{marginTop:"20px", marginBottom:"20px", marginLeft:"10px", marginRight:"10px"}}>
           <Grid item xs={4}>
             <GraphCard 
               duration="month" 
