@@ -43,5 +43,5 @@ export const maxCategory = (categories) => categories.reduce((maxCategory, curre
 
 export const expenseToday = (expense) => {
   let now=moment().format('YYYY-MM-DD')
-  return expense.reduce((total, current) => moment(current.date).format('YYYY-MM-DD')==now ? total+current.cost : total, 0)
+  return expense.reduce((total, current) => moment(current.date).format('YYYY-MM-DD')===now ? total+current.cost : total, 0)
 }
