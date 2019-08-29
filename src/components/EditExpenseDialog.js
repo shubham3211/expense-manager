@@ -91,7 +91,7 @@ class EditExpenseDialog extends React.Component {
 
 const editForm = reduxForm({
   form: 'editExpense',
-  // validate
+  validate
 })(EditExpenseDialog)
 
 export default connect(null, {expense})(editForm);

@@ -2,7 +2,7 @@ import React from 'react';
 import { expense } from '../redux/actions/expense';
 import { connect } from 'react-redux';
 import { distributeExpense } from '../utils/expenseDuration'
-import HomeTable from './HomeTable'
+import HomeTable from './ExpenseTable'
 import DoughnutGraph from './DoughnutGraph'
 import { expenseCategory } from '../redux/actions/expenseCategory';
 import InfoCard from './InfoCard'

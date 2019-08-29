@@ -1,7 +1,7 @@
 import React from 'react';
 import CardContainer from './CardContainer';
-import { Grid, Container } from '@material-ui/core';
-import HomeTable from './HomeTable';
+import { Grid } from '@material-ui/core';
+import HomeTable from './ExpenseTable';
 import AddExpenseDialog from './AddExpenseDialog';
 
 class Home extends React.Component {
